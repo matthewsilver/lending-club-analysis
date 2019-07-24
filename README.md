@@ -34,12 +34,34 @@ img
 `loan_ETL.py` contains the code to run the ETL pipeline and provide the reading and processing data functions
 that the exploratory analysis uses as well.
 
-# Running the Code
+# Setup
 For this project, I used Databricks, a notebook programming interface, to execute code and run my 
 pipeline. The interface and workflow is similar to Jupyter, but Databricks is designed to work well with
 Spark-intensive applications, which could be desirable for this pipeline if more data and more intensive
-computations are integrated in the future. If you would like to run the code in this repository, copy it into Databricks
-, which has a community edition for free cluster usage.
+computations are integrated in the future.
+
+To run this project, the setup is as follows:
+1. Create a Databricks Community account at https://community.cloud.databricks.com/.
+2. Create an AWS account, generate an access key pair, and record the access and secret key values.
+In S3, create a new bucket and two folders, one to handle uploading raw loan data and the other to store
+processed loan data. Upload any raw files as necessary to the raw loan data folder.
+3. In your Databricks account, create a notebook called `!_creds`. Put the following code in the file:
+
+    ```
+    AWS_ACCESS_KEY = "<access key>"
+    AWS_SECRET_KEY = "<secret key>"
+    ```
+
+4. Create a new notebook in Databricks for the ETL. Insert the command `%run ./!_creds` at the top and run it to import
+the credentials from step 3.
+5. If you would like to run the exploratory analysis, create another notebook in Databricks and run the `!_creds` file at the top. 
+6. To run the ETL and exploratory analysis code, either copy the code in the `src` folder into the respective Databricks notebook directly,
+or create a Python egg for each file and load into Databricks library using this guide: https://forums.databricks.com/questions/12855/how-to-install-python-package-from-github-on-datab.html.
+Before running the code, make sure the config file in the `main()` method is adjusted to reflect your bucket and
+folder names. The raw folder name may need to point to a specific file rather than a folder if you want to read only
+certain files in the raw data folder.
+7. If you would like to set up a Redshift cluster for querying from Parquet, visit the following link: https://docs.aws.amazon.com/redshift/latest/gsg/rs-gsg-launch-sample-cluster.html.
+If you have not set up Redshift yet on your AWS account, you can run it for two months for free.
 
 # Exploratory Data Analysis
 
@@ -84,7 +106,7 @@ other factors would contribute to whether one's loans will more likely be in goo
 
 # Pipeline
 
-![Pipeline](img/pipeline.png)
+![Pipeline](img/pipeline_2.png)
 
 The pipeline shown above highlights the three main components of taking raw loan data and feeding it
 into a warehouse:
@@ -109,7 +131,8 @@ The technologies above were used due to their simplicity, computational abilitie
 inexpensive and flexible file storage system, so CSV, JSON, Parquet, and other common file formats can easily be
 integrated in case the input or output data formats change. Spark and Databricks are advantageous for computational purposes: since they can
 process large amounts of data in a relatively short amount of time, data scientists and analysts can quickly query
-data, build models, and perform aggregations and joins. Finally, storing the processed data in parquet allows for easy integration
+data, build models, and perform aggregations and joins. Additionally, Spark has a built-in machine learning library for quicker
+training, validation, and testing on datasets. Finally, storing the processed data in parquet allows for easy integration
  with Redshift to build a data warehouse, and the queries are faster since the columnar storage is optimal, as stated in the "Processed data storage" section above.
  While I considered traditional relational databases for this pipeline, given that there may be need to scale up data processing
  and ingestion significantly in the future I wanted to build a system capable of scaling better.    
