@@ -15,7 +15,7 @@ periodic updates in the data?
      
 # The Dataset
 The Kaggle Lending Club Loan Dataset contains complete loan data for all loans issued by the Lending Club, a
-peer-to-peer lending company based in San Francisco, from 2007 to 2015. There are around 890,000 observations and 75
+peer-to-peer lending company based in San Francisco, from 2007 to 2015. There are around 2.2 million observations and 149
 variables. A data dictionary explaining each variable can be found on the Kaggle dataset link in the Overview section,
 under the "Data" tab.
 
