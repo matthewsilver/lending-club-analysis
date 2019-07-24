@@ -124,7 +124,7 @@ dimension table.
 - The ability to join new loan data into existing loan data to prevent duplicates and merge time-based data (for
 example, see how the payment of a loan has evolved over time)
 
-#Improvements
+# Improvements
 
 With more time, I would explore the following improvements to this pipeline:
 - Type casting for every field in the dataset. Currently the CSV has everything in string format, so
