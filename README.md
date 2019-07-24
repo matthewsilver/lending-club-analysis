@@ -88,8 +88,8 @@ After exploring the data, one aspect I wanted to hone in on was the statuses of 
 contribute to those statuses. Knowing factors that lead to different loan statuses is critical for Lending Club's
 business model as they can better understand whether someone applying for a loan will pay it back in full and 
 assign the appropriate rating to the loan. The heatmap I produced looks at the amount requested for the loan,
-on the x-axis and rounded to the nearest $10,000 to allow for bucketing, and the annual income, rounded to the nearest
-power of 10 to prevent especially high incomes from dominating the graph. The values, or colors, in the heatmap correspond
+on the x-axis and rounded to the nearest $10,000 to allow for bucketing, and the annual income, on the y-axis and rounded to the nearest
+power of 10, to prevent especially high incomes from dominating the graph. The values, or colors, in the heatmap correspond
 to the percentage of loans that are in good standing.
 
 From this heatmap, it is interesting to note that there is no clear correlation between loan amount requestd,
